@@ -2,9 +2,5 @@
 
 #pragma GCC system_header
 #ifdef __cplusplus
-#include <unistd.h>
-#include <sys/syscall.h>
-#include <linux/futex.h>
 #include <atomic>
-#include <mutex>
 #endif // __cplusplus

@@ -20,14 +20,6 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-#include <unistd.h>
-#include <sys/syscall.h>
-#include <linux/futex.h>
-#include <atomic>
-#include <mutex>
-#include <iostream>
-#include <thread>
-#include <chrono>
 
 //platform 0: unknown
 //platform 1: linux
@@ -42,6 +34,21 @@
 	#pragma message "FTS Warning: no platform could be identified. Thread sleeping mechanisms will revert to std::mutex"
 	#define FTS_PLATFORM 0
 #endif
+
+
+#include <atomic>
+#if FTS_PLATFORM == 0
+	#include <mutex>
+#endif
+#if FTS_PLATFORM == 1
+	#include <unistd.h>
+	#include <sys/syscall.h>
+	#include <linux/futex.h>
+#endif
+#include <iostream>
+#include <thread>
+#include <chrono>
+
 
 namespace fts
 {
@@ -113,6 +120,9 @@ namespace fts
 		private:
 			std::atomic_int32_t m_counter;
 			int32_t m_address;
+			#if FTS_PLATFORM == 0
+			std::mutex m_mutex;
+			#endif
 	};
 
 	class I_signalling_object
@@ -141,6 +151,11 @@ namespace fts
 		
 		private:
 			int32_t m_address;
+			#if FTS_PLATFORM == 0
+			std::mutex m_mutex;
+			std::atomic_bool m_unlocked;
+			std::atomic_int32_t m_num_waiting;
+			#endif
 	};
 	class spin_signal : I_signalling_object
 	{
@@ -178,7 +193,7 @@ fts::spin_lock::spin_lock()
 : m_is_locked(false) {}
 
 
-//=========================================adaptivelock=========================================
+//=========================================adaptivelock========m_num_waiting================================
 void fts::adaptive_lock::lock()
 {
 	//platform: linux
@@ -189,7 +204,7 @@ void fts::adaptive_lock::lock()
 	#elif FTS_PLATFORM == 2
 		std::cout << "ungaurded code" << std::endl;
 	//platform: unknown
-	#elif FTS_PLATFORM == unknown
+	#elif FTS_PLATFORM == 0
 		m_mutex.lock();
 	#endif
 }
@@ -203,7 +218,7 @@ void fts::adaptive_lock::unlock()
 	#elif FTS_PLATFORM == 2
 		std::cout << "ungaurded code" << std::endl;
 	//platform: unknown
-	#elif FTS_PLATFORM == unknown
+	#elif FTS_PLATFORM == 0
 		m_mutex.unlock();
 	#endif
 }
@@ -221,7 +236,7 @@ bool fts::adaptive_lock::try_lock()
 	#elif FTS_PLATFORM == 2
 		std::cout << "ungaurded code" << std::endl;
 	//platform: unknown
-	#elif FTS_PLATFORM == unknown
+	#elif FTS_PLATFORM == 0
 		return m_mutex.try_lock();
 	#endif
 
@@ -287,8 +302,17 @@ void fts::adaptive_semaphore::lock()
 	#elif FTS_PLATFORM == 2
 		
 	//platform: unknown
-	#elif FTS_PLATFORM == unknown
-		
+	#elif FTS_PLATFORM == 0
+		while(true)
+		{
+			auto prev = m_counter.fetch_sub(1, std::memory_order_acquire);
+			if(prev > 0) return;
+			else
+			{
+				m_counter.fetch_add(1, std::memory_order_acquire);
+				m_mutex.lock();
+			}
+		}
 	#endif
 }
 void fts::adaptive_semaphore::unlock()
@@ -301,14 +325,13 @@ void fts::adaptive_semaphore::unlock()
 	#elif FTS_PLATFORM == 2
 		
 	//platform: unknown
-	#elif FTS_PLATFORM == unknown
-		
+	#elif FTS_PLATFORM == 0
+		m_counter.fetch_add(1, std::memory_order_acquire);
+		m_mutex.unlock();
 	#endif
 }
 bool fts::adaptive_semaphore::try_lock()
 {
-	
-
 	//platform: linux
 	#if FTS_PLATFORM == 1
 		while(true)
@@ -325,9 +348,20 @@ bool fts::adaptive_semaphore::try_lock()
 	#elif FTS_PLATFORM == 2
 		
 	//platform: unknown
-	#elif FTS_PLATFORM == unknown
-		
+	#elif FTS_PLATFORM == 00
+		while(true)
+		{
+			auto prev = m_counter.fetch_sub(1, std::memory_order_acquire);
+			if(prev > 0) return true;
+			else
+			{
+				m_counter.fetch_add(1, std::memory_order_acquire);
+				return false;
+			}
+		}
 	#endif
+
+	return false;
 }
 fts::adaptive_semaphore::adaptive_semaphore()
 : m_counter(1), m_address(0) {}
@@ -338,18 +372,67 @@ fts::adaptive_semaphore::adaptive_semaphore(int32_t max)
 //=========================================signal=========================================
 void fts::signal::wait()
 {
-	syscall(SYS_futex, &m_address, FUTEX_WAIT_PRIVATE, 0, nullptr);
+	//platform: linux
+	#if FTS_PLATFORM == 1
+		syscall(SYS_futex, &m_address, FUTEX_WAIT_PRIVATE, 0, nullptr);
+	//platform: windows
+	#elif FTS_PLATFORM == 2
+		
+	//platform: unknown
+	#elif FTS_PLATFORM == 0
+		m_num_waiting.fetch_add(1);
+		m_mutex.lock();
+		m_unlocked.store(true);
+		m_mutex.unlock();
+	#endif
 }
 void fts::signal::wake()
 {
-	syscall(SYS_futex, &m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
+	//platform: linux
+	#if FTS_PLATFORM == 1
+		syscall(SYS_futex, &m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
+	//platform: windows
+	#elif FTS_PLATFORM == 2
+		
+	//platform: unknown
+	#elif FTS_PLATFORM == 0
+		m_unlocked.store(false);
+		m_mutex.unlock();
+		while(!m_unlocked.load());
+		m_mutex.lock();
+		m_num_waiting.fetch_sub(1);
+	#endif
 }
 void fts::signal::wake_all()
 {
-	syscall(SYS_futex, &m_address, FUTEX_WAKE_PRIVATE, std::numeric_limits<int32_t>::max(), nullptr);
+	//platform: linux
+	#if FTS_PLATFORM == 1
+		syscall(SYS_futex, &m_address, FUTEX_WAKE_PRIVATE, std::numeric_limits<int32_t>::max(), nullptr);
+	//platform: windows
+	#elif FTS_PLATFORM == 2
+		
+	//platform: unknown
+	#elif FTS_PLATFORM == 0
+		for(int32_t i = m_num_waiting.load(); i > 0; i--)
+		{
+			m_unlocked.store(false);
+			m_mutex.unlock();
+			while(!m_unlocked.load());
+			m_mutex.lock();
+		}
+		m_num_waiting.store(0);
+	#endif
 }
 fts::signal::signal()
-: m_address(0) {}
+: m_address(0)
+#if FTS_PLATFORM == 0
+, m_unlocked(false), m_num_waiting(0)
+#endif
+{
+	#if FTS_PLATFORM == 0
+	m_mutex.lock();
+	#endif
+}
 
 
 //=========================================spinsignal=========================================
@@ -453,6 +536,16 @@ void waiter(fts::signal* sig)
 
 int main(int, char* [])
 {
+	#if FTS_PLATFORM == 0
+		std::cout << "platform: unknown" << std::endl;
+	#endif
+	#if FTS_PLATFORM == 1
+		std::cout << "platform: linux" << std::endl;
+	#endif
+	#if FTS_PLATFORM == 2
+		std::cout << "platform: windows" << std::endl;
+	#endif
+	
 	fts::spin_semaphore lock;
 	
 	for(int i = 0; i < 4; i++)

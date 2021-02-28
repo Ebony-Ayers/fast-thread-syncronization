@@ -45,11 +45,7 @@ if(ENABLE_PCH)
   target_precompile_headers(
     project_options
     INTERFACE
-    <unistd.h>
-    <sys/syscall.h>
-    <linux/futex.h>
-    <atomic>
-    <mutex>)
+    <atomic>)
 endif()
 
 find_package(Threads)
