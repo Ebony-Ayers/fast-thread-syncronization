@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src",
+  "command": "/usr/bin/c++   -g -flto -fno-fat-lto-objects -fdiagnostics-color=always -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=c++2a -Winvalid-pch -x c++-header -include /home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -o CMakeFiles/fts.dir/cmake_pch.hxx.gch -c /home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx",
+  "file": "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx"
+},
+{
+  "directory": "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src",
+  "command": "/usr/bin/c++   -g -flto -fno-fat-lto-objects -fdiagnostics-color=always -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=c++2a -Winvalid-pch -include /home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -o CMakeFiles/fts.dir/fts.cpp.o -c /home/joseph/git/Ebony-Ayers/fast-thread-syncronization/src/fts.cpp",
+  "file": "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/src/fts.cpp"
+}
+]

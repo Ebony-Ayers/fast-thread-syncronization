@@ -1,0 +1,10 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/CMakeFiles/_CMakeLTOTest-CXX/src/main.cpp
+
