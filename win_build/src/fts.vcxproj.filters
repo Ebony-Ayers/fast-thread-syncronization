@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Joseph\Documents\GitHub\fast-thread-syncronization\win_build\src\CMakeFiles\fts.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Joseph\Documents\GitHub\fast-thread-syncronization\src\fts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Joseph\Documents\GitHub\fast-thread-syncronization\win_build\src\CMakeFiles\fts.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joseph\Documents\GitHub\fast-thread-syncronization\win_build\src\CMakeFiles\fts.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joseph\Documents\GitHub\fast-thread-syncronization\win_build\src\CMakeFiles\fts.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joseph\Documents\GitHub\fast-thread-syncronization\win_build\src\CMakeFiles\fts.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Joseph\Documents\GitHub\fast-thread-syncronization\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{543E3267-29F0-381D-9133-4948236A8BF5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CB3385A5-E52D-3AD3-90B4-CAE7E4C22199}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -53,7 +53,9 @@ find_package(Threads)
 add_subdirectory(src)
 
 target_link_libraries(fts PUBLIC ${CMAKE_THREAD_LIBS_INIT})
-
+if(MSVC)
+    target_link_libraries(fts PUBLIC Synchronization)
+endif()
 option(ENABLE_UNITY "Enable Unity builds of projects" OFF)
 if(ENABLE_UNITY)
   # Add for any project you want to apply unity builds for

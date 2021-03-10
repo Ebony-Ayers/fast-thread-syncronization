@@ -1,0 +1,37 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeCXXInformation.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeGenericSystem.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeInitializeConfigs.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeLanguageInformation.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeRCInformation.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CheckCXXSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CheckIPOSupported.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CheckIPOSupported/CMakeLists-CXX.txt.in
+C:/Program Files/CMake/share/cmake-3.20/Modules/CheckIPOSupported/foo.cpp
+C:/Program Files/CMake/share/cmake-3.20/Modules/CheckIPOSupported/main.cpp
+C:/Program Files/CMake/share/cmake-3.20/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/CheckLibraryExists.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/Compiler/MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/FindThreads.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/Internal/CheckSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/Platform/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/Platform/Windows.cmake
+C:/Program Files/CMake/share/cmake-3.20/Modules/Platform/WindowsPaths.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/CMakeLists.txt
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/cmake/Cache.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/cmake/CompilerWarnings.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/cmake/CppStandard.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/cmake/PreventInSourceBuilds.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/cmake/Sanitizers.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/cmake/StandardProjectSettings.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/cmake/StaticAnalyzers.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/win_build/CMakeFiles/3.20.0-rc2/CMakeCXXCompiler.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/win_build/CMakeFiles/3.20.0-rc2/CMakeRCCompiler.cmake
+C:/Users/Joseph/Documents/GitHub/fast-thread-syncronization/win_build/CMakeFiles/3.20.0-rc2/CMakeSystem.cmake
