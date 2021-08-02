@@ -1,4 +1,4 @@
-# Install script for directory: /home/joseph/git/Ebony-Ayers/fast-thread-syncronization/src
+# Install script for directory: /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

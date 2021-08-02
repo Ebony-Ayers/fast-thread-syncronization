@@ -1,5 +1,5 @@
-/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/CMakeFiles/rebuild_cache.dir
-/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/CMakeFiles/edit_cache.dir
-/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/rebuild_cache.dir
-/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/edit_cache.dir
-/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/rebuild_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/edit_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/rebuild_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/edit_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir

@@ -1,18 +1,17 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx" "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.gch"
-  "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx" "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.gch"
-  "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/src/fts.cpp" "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/fts.cpp.o"
-  "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx" "/home/joseph/git/Ebony-Ayers/fast-thread-syncronization/build/src/CMakeFiles/fts.dir/fts.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch" "gcc" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch.d"
+  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch" "gcc" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch.d"
+  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src/fts.cpp" "src/CMakeFiles/fts.dir/fts.cpp.o" "gcc" "src/CMakeFiles/fts.dir/fts.cpp.o.d"
+  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx" "src/CMakeFiles/fts.dir/fts.cpp.o" "gcc" "src/CMakeFiles/fts.dir/fts.cpp.o.d"
   )
 
 # Targets to which this target links.

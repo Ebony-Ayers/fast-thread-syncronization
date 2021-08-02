@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/fts.dir/cmake_pch.hxx.gch"
+  "CMakeFiles/fts.dir/cmake_pch.hxx.gch.d"
   "CMakeFiles/fts.dir/fts.cpp.o"
+  "CMakeFiles/fts.dir/fts.cpp.o.d"
   "fts"
   "fts.pdb"
 )
