@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -flto -fno-fat-lto-objects CMakeFiles/fts.dir/fts.cpp.o -o fts  -lpthread 

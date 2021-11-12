@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../CMakeLists.txt"
-  "CMakeFiles/3.21.1/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.21.1/CMakeSystem.cmake"
+  "CMakeFiles/3.21.4/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.21.4/CMakeSystem.cmake"
   "../cmake/Cache.cmake"
   "../cmake/CompilerWarnings.cmake"
   "../cmake/CppStandard.cmake"

@@ -8,10 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch" "gcc" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch.d"
-  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch" "gcc" "src/CMakeFiles/fts.dir/cmake_pch.hxx.gch.d"
-  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src/fts.cpp" "src/CMakeFiles/fts.dir/fts.cpp.o" "gcc" "src/CMakeFiles/fts.dir/fts.cpp.o.d"
-  "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx" "src/CMakeFiles/fts.dir/fts.cpp.o" "gcc" "src/CMakeFiles/fts.dir/fts.cpp.o.d"
   )
 
 # Targets to which this target links.

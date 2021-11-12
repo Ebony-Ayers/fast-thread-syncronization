@@ -1,22 +1,22 @@
 Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
 Change Dir: /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_55685/fast && /usr/bin/make  -f CMakeFiles/cmTC_55685.dir/build.make CMakeFiles/cmTC_55685.dir/build
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1312a/fast && /usr/bin/make  -f CMakeFiles/cmTC_1312a.dir/build.make CMakeFiles/cmTC_1312a.dir/build
 make[1]: Entering directory '/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_55685.dir/src.cxx.o
-/usr/bin/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -std=c++20 -o CMakeFiles/cmTC_55685.dir/src.cxx.o -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp/src.cxx
-Linking CXX executable cmTC_55685
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_55685.dir/link.txt --verbose=1
-/usr/bin/c++ CMakeFiles/cmTC_55685.dir/src.cxx.o -o cmTC_55685 
-/usr/bin/ld: CMakeFiles/cmTC_55685.dir/src.cxx.o: in function `main':
+Building CXX object CMakeFiles/cmTC_1312a.dir/src.cxx.o
+/usr/bin/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -std=c++20 -o CMakeFiles/cmTC_1312a.dir/src.cxx.o -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_1312a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1312a.dir/link.txt --verbose=1
+/usr/bin/c++ CMakeFiles/cmTC_1312a.dir/src.cxx.o -o cmTC_1312a 
+/usr/bin/ld: CMakeFiles/cmTC_1312a.dir/src.cxx.o: in function `main':
 src.cxx:(.text+0x3e): undefined reference to `pthread_create'
 /usr/bin/ld: src.cxx:(.text+0x4a): undefined reference to `pthread_detach'
 /usr/bin/ld: src.cxx:(.text+0x56): undefined reference to `pthread_cancel'
 /usr/bin/ld: src.cxx:(.text+0x67): undefined reference to `pthread_join'
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_55685.dir/build.make:99: cmTC_55685] Error 1
+make[1]: *** [CMakeFiles/cmTC_1312a.dir/build.make:99: cmTC_1312a] Error 1
 make[1]: Leaving directory '/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:127: cmTC_55685/fast] Error 2
+make: *** [Makefile:127: cmTC_1312a/fast] Error 2
 
 
 Source file was:
@@ -43,18 +43,18 @@ int main(void)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_89676/fast && /usr/bin/make  -f CMakeFiles/cmTC_89676.dir/build.make CMakeFiles/cmTC_89676.dir/build
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_7b13a/fast && /usr/bin/make  -f CMakeFiles/cmTC_7b13a.dir/build.make CMakeFiles/cmTC_7b13a.dir/build
 make[1]: Entering directory '/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_89676.dir/CheckFunctionExists.cxx.o
-/usr/bin/c++   -DCHECK_FUNCTION_EXISTS=pthread_create -std=c++20 -o CMakeFiles/cmTC_89676.dir/CheckFunctionExists.cxx.o -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
-Linking CXX executable cmTC_89676
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_89676.dir/link.txt --verbose=1
-/usr/bin/c++  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_89676.dir/CheckFunctionExists.cxx.o -o cmTC_89676  -lpthreads 
+Building CXX object CMakeFiles/cmTC_7b13a.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++   -DCHECK_FUNCTION_EXISTS=pthread_create -std=c++20 -o CMakeFiles/cmTC_7b13a.dir/CheckFunctionExists.cxx.o -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_7b13a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b13a.dir/link.txt --verbose=1
+/usr/bin/c++  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_7b13a.dir/CheckFunctionExists.cxx.o -o cmTC_7b13a  -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_89676.dir/build.make:99: cmTC_89676] Error 1
+make[1]: *** [CMakeFiles/cmTC_7b13a.dir/build.make:99: cmTC_7b13a] Error 1
 make[1]: Leaving directory '/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:127: cmTC_89676/fast] Error 2
+make: *** [Makefile:127: cmTC_7b13a/fast] Error 2
 
 
 

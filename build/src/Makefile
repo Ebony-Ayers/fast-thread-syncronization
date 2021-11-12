@@ -130,45 +130,6 @@ fts/fast:
 	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/build
 .PHONY : fts/fast
 
-# target to build an object file
-cmake_pch.hxx.gch:
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/cmake_pch.hxx.gch
-.PHONY : cmake_pch.hxx.gch
-
-# target to preprocess a source file
-cmake_pch.hxx.i:
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/cmake_pch.hxx.i
-.PHONY : cmake_pch.hxx.i
-
-# target to generate assembly for a file
-cmake_pch.hxx.s:
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/cmake_pch.hxx.s
-.PHONY : cmake_pch.hxx.s
-
-fts.o: fts.cpp.o
-.PHONY : fts.o
-
-# target to build an object file
-fts.cpp.o:
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/fts.cpp.o
-.PHONY : fts.cpp.o
-
-fts.i: fts.cpp.i
-.PHONY : fts.i
-
-# target to preprocess a source file
-fts.cpp.i:
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/fts.cpp.i
-.PHONY : fts.cpp.i
-
-fts.s: fts.cpp.s
-.PHONY : fts.s
-
-# target to generate assembly for a file
-fts.cpp.s:
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/fts.cpp.s
-.PHONY : fts.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -178,12 +139,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... fts"
-	@echo "... cmake_pch.hxx.gch"
-	@echo "... cmake_pch.hxx.i"
-	@echo "... cmake_pch.hxx.s"
-	@echo "... fts.o"
-	@echo "... fts.i"
-	@echo "... fts.s"
 .PHONY : help
 
 

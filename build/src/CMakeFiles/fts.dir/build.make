@@ -69,55 +69,6 @@ include src/CMakeFiles/fts.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/fts.dir/flags.make
 
-src/CMakeFiles/fts.dir/cmake_pch.hxx.gch: src/CMakeFiles/fts.dir/flags.make
-src/CMakeFiles/fts.dir/cmake_pch.hxx.gch: src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx
-src/CMakeFiles/fts.dir/cmake_pch.hxx.gch: src/CMakeFiles/fts.dir/cmake_pch.hxx
-src/CMakeFiles/fts.dir/cmake_pch.hxx.gch: src/CMakeFiles/fts.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/fts.dir/cmake_pch.hxx.gch"
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && /usr/bin/ccache /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -x c++-header -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -MD -MT src/CMakeFiles/fts.dir/cmake_pch.hxx.gch -MF CMakeFiles/fts.dir/cmake_pch.hxx.gch.d -o CMakeFiles/fts.dir/cmake_pch.hxx.gch -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx
-
-src/CMakeFiles/fts.dir/cmake_pch.hxx.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/fts.dir/cmake_pch.hxx.i"
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -x c++-header -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -E /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx > CMakeFiles/fts.dir/cmake_pch.hxx.i
-
-src/CMakeFiles/fts.dir/cmake_pch.hxx.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/fts.dir/cmake_pch.hxx.s"
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -x c++-header -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -S /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx -o CMakeFiles/fts.dir/cmake_pch.hxx.s
-
-src/CMakeFiles/fts.dir/fts.cpp.o: src/CMakeFiles/fts.dir/flags.make
-src/CMakeFiles/fts.dir/fts.cpp.o: ../src/fts.cpp
-src/CMakeFiles/fts.dir/fts.cpp.o: src/CMakeFiles/fts.dir/cmake_pch.hxx
-src/CMakeFiles/fts.dir/fts.cpp.o: src/CMakeFiles/fts.dir/cmake_pch.hxx.gch
-src/CMakeFiles/fts.dir/fts.cpp.o: src/CMakeFiles/fts.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/fts.dir/fts.cpp.o"
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && /usr/bin/ccache /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -MD -MT src/CMakeFiles/fts.dir/fts.cpp.o -MF CMakeFiles/fts.dir/fts.cpp.o.d -o CMakeFiles/fts.dir/fts.cpp.o -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src/fts.cpp
-
-src/CMakeFiles/fts.dir/fts.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/fts.dir/fts.cpp.i"
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -E /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src/fts.cpp > CMakeFiles/fts.dir/fts.cpp.i
-
-src/CMakeFiles/fts.dir/fts.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/fts.dir/fts.cpp.s"
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src/CMakeFiles/fts.dir/cmake_pch.hxx -S /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src/fts.cpp -o CMakeFiles/fts.dir/fts.cpp.s
-
-# Object files for target fts
-fts_OBJECTS = \
-"CMakeFiles/fts.dir/fts.cpp.o"
-
-# External object files for target fts
-fts_EXTERNAL_OBJECTS =
-
-src/fts: src/CMakeFiles/fts.dir/cmake_pch.hxx.gch
-src/fts: src/CMakeFiles/fts.dir/fts.cpp.o
-src/fts: src/CMakeFiles/fts.dir/build.make
-src/fts: src/CMakeFiles/fts.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable fts"
-	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/fts.dir/link.txt --verbose=$(VERBOSE)
-
-# Rule to build all files generated by this target.
-src/CMakeFiles/fts.dir/build: src/fts
-.PHONY : src/CMakeFiles/fts.dir/build
-
 src/CMakeFiles/fts.dir/clean:
 	cd /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/src && $(CMAKE_COMMAND) -P CMakeFiles/fts.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/fts.dir/clean

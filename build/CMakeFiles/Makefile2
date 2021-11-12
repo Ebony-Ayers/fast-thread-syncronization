@@ -96,12 +96,12 @@ src/clean: src/CMakeFiles/fts.dir/clean
 src/CMakeFiles/fts.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/fts.dir/build.make src/CMakeFiles/fts.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles --progress-num=1,2,3 "Built target fts"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles --progress-num= "Built target fts"
 .PHONY : src/CMakeFiles/fts.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/fts.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/fts.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/fts.dir/rule
