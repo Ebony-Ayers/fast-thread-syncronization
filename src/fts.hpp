@@ -212,7 +212,7 @@ namespace fts
 			inline void lower() override;
 			inline bool isRaised() override;
 
-			flag();
+			Flag();
 		
 		private:
 			std::atomic_bool m_isRaised;
@@ -543,17 +543,17 @@ fts::SpinSignal::SpinSignal()
 
 
 //=========================================flag=========================================
-inline void fts::flag::raise()
+inline void fts::Flag::raise()
 {
 	this->m_isRaised.store(true);
 }
-inline void fts::flag::lower()
+inline void fts::Flag::lower()
 {
 	this->m_isRaised.store(false);
 }
-inline bool fts::flag::isRaised()
+inline bool fts::Flag::isRaised()
 {
 	return this->m_isRaised.load();
 }
-fts::flag::flag()
+fts::Flag::flag()
 : m_isRaised(false) {}
