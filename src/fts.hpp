@@ -555,5 +555,5 @@ inline bool fts::Flag::isRaised()
 {
 	return this->m_isRaised.load();
 }
-fts::Flag::flag()
+fts::Flag::Flag()
 : m_isRaised(false) {}
