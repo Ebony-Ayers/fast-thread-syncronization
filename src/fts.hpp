@@ -237,8 +237,6 @@ inline bool fts::SpinLock::try_lock()
 {
 	return ! this->m_isLocked.exchange(true, std::memory_order_acquire);
 }
-fts::SpinLock::SpinLock()
-: m_isLocked(false) {}
 
 
 //=========================================AdaptiveLock========================================
@@ -298,8 +296,6 @@ inline bool fts::AdaptiveLock::try_lock()
 
 	return false;
 }
-fts::AdaptiveLock::AdaptiveLock()
-: m_address(0) {}
 
 
 //=========================================SpinSemaphore=========================================
@@ -333,10 +329,6 @@ inline bool fts::SpinSemaphore::try_lock()
 		}
 	}
 }
-fts::SpinSemaphore::SpinSemaphore()
-: m_counter(1) {}
-fts::SpinSemaphore::SpinSemaphore(int32_t max)
-: m_counter(max) {}
 
 
 //=========================================AdaptiveSemaphore=========================================
@@ -439,10 +431,6 @@ inline bool fts::AdaptiveSemaphore::try_lock()
 
 	return false;
 }
-fts::AdaptiveSemaphore::AdaptiveSemaphore()
-: m_counter(1), m_address(0) {}
-fts::AdaptiveSemaphore::AdaptiveSemaphore(int32_t max)
-: m_counter(max), m_address(0) {}
 
 
 //=========================================Signal=========================================
@@ -500,16 +488,6 @@ inline void fts::Signal::wakeAll()
 		this->m_numWaiting.store(0);
 	#endif
 }
-fts::Signal::Signal()
-: m_address(0)
-#ifdef FTS_PLATFORM_UNKNOWN
-, m_unlocked(false), m_numWaiting(0)
-#endif
-{
-	#ifdef FTS_PLATFORM_UNKNOWN
-	m_mutex.lock();
-	#endif
-}
 
 
 //=========================================SpinSignal=========================================
@@ -537,8 +515,6 @@ inline void fts::SpinSignal::wakeAll()
 {
 	this->m_isWaiting.store(0, std::memory_order_release);
 }
-fts::SpinSignal::SpinSignal()
-: m_isWaiting(false) {}
 
 
 
@@ -555,5 +531,3 @@ inline bool fts::Flag::isRaised()
 {
 	return this->m_isRaised.load();
 }
-fts::Flag::Flag()
-: m_isRaised(false) {}
