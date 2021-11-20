@@ -1,0 +1,10 @@
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/CMakeFiles/rebuild_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/CMakeFiles/edit_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src/CMakeFiles/rebuild_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src/CMakeFiles/edit_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src/CMakeFiles/fts_test.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/CMakeFiles/rebuild_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/CMakeFiles/edit_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src/CMakeFiles/rebuild_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src/CMakeFiles/edit_cache.dir
+/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src/CMakeFiles/fts.dir

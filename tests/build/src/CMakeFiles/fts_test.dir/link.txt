@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/fts_test.dir/main.cpp.o -o fts_test  ../main_src/src/libfts.a -lpthread 

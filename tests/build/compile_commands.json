@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src",
+  "command": "/usr/bin/c++   -g -fdiagnostics-color=always -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=gnu++20 -Winvalid-pch -x c++-header -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src/CMakeFiles/fts_test.dir/cmake_pch.hxx -o CMakeFiles/fts_test.dir/cmake_pch.hxx.gch -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src/CMakeFiles/fts_test.dir/cmake_pch.hxx.cxx",
+  "file": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src/CMakeFiles/fts_test.dir/cmake_pch.hxx.cxx"
+},
+{
+  "directory": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src",
+  "command": "/usr/bin/c++   -g -fdiagnostics-color=always -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=gnu++20 -Winvalid-pch -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/src/CMakeFiles/fts_test.dir/cmake_pch.hxx -o CMakeFiles/fts_test.dir/main.cpp.o -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/src/main.cpp",
+  "file": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/src/main.cpp"
+},
+{
+  "directory": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src",
+  "command": "/usr/bin/c++   -g -fdiagnostics-color=always -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=c++20 -Winvalid-pch -x c++-header -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src/CMakeFiles/fts.dir/cmake_pch.hxx -o CMakeFiles/fts.dir/cmake_pch.hxx.gch -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx",
+  "file": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src/CMakeFiles/fts.dir/cmake_pch.hxx.cxx"
+},
+{
+  "directory": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src",
+  "command": "/usr/bin/c++   -g -fdiagnostics-color=always -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=c++20 -Winvalid-pch -include /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/tests/build/main_src/src/CMakeFiles/fts.dir/cmake_pch.hxx -o CMakeFiles/fts.dir/fts.cpp.o -c /home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src/fts.cpp",
+  "file": "/home/ebony/git/Ebony-Ayers/fast-thread_syncronization/src/fts.cpp"
+}
+]

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libfts.a CMakeFiles/fts.dir/fts.cpp.o
+/usr/bin/ranlib libfts.a
