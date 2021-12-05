@@ -63,13 +63,6 @@
 #include <chrono>
 
 
-
-#ifdef FTS_COMPILER_GCC
-	#define FTS_EXPECT(condition, outcome) __builtin_expect(condition, outcome)
-#else
-	#define FTS_EXPECT(condition, outcome) condition
-#endif
-
 namespace fts
 {
 	class I_lockableObject
@@ -176,6 +169,7 @@ namespace fts
 			std::atomic_bool m_unlocked;
 			std::atomic_int32_t m_numWaiting;
 			#endif
+			std::atomic_bool m_isSomeoneWaiting;
 	};
 	class SpinSignal : public I_signallingObject
 	{
@@ -225,7 +219,7 @@ inline void fts::SpinLock::lock()
 {
 	while(true)
 	{
-		if(FTS_EXPECT( !this->m_isLocked.exchange(true, std::memory_order_acquire) , true)) break;
+		if(!this->m_isLocked.exchange(true, std::memory_order_acquire)) [[likely]] break;
 		while(this->m_isLocked.load(std::memory_order_relaxed));
 	}
 }
@@ -304,7 +298,7 @@ inline void fts::SpinSemaphore::lock()
 	while(true)
 	{
 		auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-		if(FTS_EXPECT( prev > 0 , true)) return;
+		if(prev > 0) [[likely]] return;
 		else
 		{
 			this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -321,7 +315,7 @@ inline bool fts::SpinSemaphore::try_lock()
 	while(true)
 	{
 		auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-		if(FTS_EXPECT( prev > 0 , true)) return true;
+		if(prev > 0) [[likely]] return true;
 		else
 		{
 			this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -339,7 +333,7 @@ inline void fts::AdaptiveSemaphore::lock()
 		while(true)
 		{
 			auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-			if(FTS_EXPECT( prev > 0 , true)) return;
+			if(prev > 0) [[likely]] return;
 			else
 			{
 				this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -351,7 +345,7 @@ inline void fts::AdaptiveSemaphore::lock()
 		while (true)
 		{
 			auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-			if (FTS_EXPECT( prev > 0 , true)) return;
+			if(prev > 0) [[likely]] return;
 			else
 			{
 				this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -364,7 +358,7 @@ inline void fts::AdaptiveSemaphore::lock()
 		while(true)
 		{
 			auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-			if(FTS_EXPECT( prev > 0 , true)) return;
+			if(prev > 0) [[likely]] return;
 			else
 			{
 				this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -396,7 +390,7 @@ inline bool fts::AdaptiveSemaphore::try_lock()
 		while(true)
 		{
 			auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-			if(FTS_EXPECT( prev > 0 , true)) return true;
+			if(prev > 0) [[likely]] return true;
 			else
 			{
 				this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -408,7 +402,7 @@ inline bool fts::AdaptiveSemaphore::try_lock()
 		while (true)
 		{
 			auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-			if (FTS_EXPECT( prev > 0 , true)) return true;
+			if (prev > 0) [[likely]] return true;
 			else
 			{
 				this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -420,7 +414,7 @@ inline bool fts::AdaptiveSemaphore::try_lock()
 		while(true)
 		{
 			auto prev = this->m_counter.fetch_sub(1, std::memory_order_acquire);
-			if(FTS_EXPECT( prev > 0 , true)) return true;
+			if(prev > 0) [[likely]] return true;
 			else
 			{
 				this->m_counter.fetch_add(1, std::memory_order_acquire);
@@ -450,43 +444,51 @@ inline void fts::Signal::wait()
 		this->m_unlocked.store(true);
 		this->m_mutex.unlock();
 	#endif
+	this->m_isSomeoneWaiting.store(true);
 }
 inline void fts::Signal::wake()
 {
-	//platform: linux
-	#ifdef FTS_PLATFORM_LINUX
-		syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
-	//platform: windows
-	#elif defined(FTS_PLATFORM_WINDOWS)
-		WakeByAddressSingle(reinterpret_cast<void*>(&this->m_address));
-	//platform: unknown
-	#elif defined(FTS_PLATFORM_UNKNOWN)
-		this->m_unlocked.store(false);
-		this->m_mutex.unlock();
-		while(!this->m_unlocked.load());
-		this->m_mutex.lock();
-		this->m_numWaiting.fetch_sub(1);
-	#endif
+	if(m_isSomeoneWaiting.load())
+	{
+		//platform: linux
+		#ifdef FTS_PLATFORM_LINUX
+			syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
+		//platform: windows
+		#elif defined(FTS_PLATFORM_WINDOWS)
+			WakeByAddressSingle(reinterpret_cast<void*>(&this->m_address));
+		//platform: unknown
+		#elif defined(FTS_PLATFORM_UNKNOWN)
+			this->m_unlocked.store(false);
+			this->m_mutex.unlock();
+			while(!this->m_unlocked.load());
+			this->m_mutex.lock();
+			this->m_numWaiting.fetch_sub(1);
+		#endif
+	}
 }
 inline void fts::Signal::wakeAll()
 {
-	//platform: linux
-	#ifdef FTS_PLATFORM_LINUX
-		syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, std::numeric_limits<int32_t>::max(), nullptr);
-	//platform: windows
-	#elif defined(FTS_PLATFORM_WINDOWS)
-		WakeByAddressAll(reinterpret_cast<void*>(&this->m_address));
-	//platform: unknown
-	#elif defined(FTS_PLATFORM_UNKNOWN)
-		for(int32_t i = this->m_numWaiting.load(); i > 0; i--)
-		{
-			this->m_unlocked.store(false);
-			this->m_mutex.unlock();
-			while(!m_unlocked.load());
-			this->m_mutex.lock();
-		}
-		this->m_numWaiting.store(0);
-	#endif
+	if(m_isSomeoneWaiting.load())
+	{
+		//platform: linux
+		#ifdef FTS_PLATFORM_LINUX
+			syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, std::numeric_limits<int32_t>::max(), nullptr);
+		//platform: windows
+		#elif defined(FTS_PLATFORM_WINDOWS)
+			WakeByAddressAll(reinterpret_cast<void*>(&this->m_address));
+		//platform: unknown
+		#elif defined(FTS_PLATFORM_UNKNOWN)
+			for(int32_t i = this->m_numWaiting.load(); i > 0; i--)
+			{
+				this->m_unlocked.store(false);
+				this->m_mutex.unlock();
+				while(!m_unlocked.load());
+				this->m_mutex.lock();
+			}
+			this->m_numWaiting.store(0);
+		#endif
+		this->m_isSomeoneWaiting.store(false);
+	}
 }
 
 

@@ -25,6 +25,7 @@ fts::Signal::Signal()
 #ifdef FTS_PLATFORM_UNKNOWN
 , m_unlocked(false), m_numWaiting(0)
 #endif
+, m_isSomeoneWaiting(false)
 {
 	#ifdef FTS_PLATFORM_UNKNOWN
 	m_mutex.lock();
