@@ -169,7 +169,6 @@ namespace fts
 			std::atomic_bool m_unlocked;
 			std::atomic_int32_t m_numWaiting;
 			#endif
-			std::atomic_bool m_isSomeoneWaiting;
 	};
 	class SpinSignal : public I_signallingObject
 	{
@@ -444,51 +443,43 @@ inline void fts::Signal::wait()
 		this->m_unlocked.store(true);
 		this->m_mutex.unlock();
 	#endif
-	this->m_isSomeoneWaiting.store(true);
 }
 inline void fts::Signal::wake()
 {
-	if(m_isSomeoneWaiting.load())
-	{
-		//platform: linux
-		#ifdef FTS_PLATFORM_LINUX
-			syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
-		//platform: windows
-		#elif defined(FTS_PLATFORM_WINDOWS)
-			WakeByAddressSingle(reinterpret_cast<void*>(&this->m_address));
-		//platform: unknown
-		#elif defined(FTS_PLATFORM_UNKNOWN)
-			this->m_unlocked.store(false);
-			this->m_mutex.unlock();
-			while(!this->m_unlocked.load());
-			this->m_mutex.lock();
-			this->m_numWaiting.fetch_sub(1);
-		#endif
-	}
+	//platform: linux
+	#ifdef FTS_PLATFORM_LINUX
+		syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
+	//platform: windows
+	#elif defined(FTS_PLATFORM_WINDOWS)
+		WakeByAddressSingle(reinterpret_cast<void*>(&this->m_address));
+	//platform: unknown
+	#elif defined(FTS_PLATFORM_UNKNOWN)
+		this->m_unlocked.store(false);
+		this->m_mutex.unlock();
+		while(!this->m_unlocked.load());
+		this->m_mutex.lock();
+		this->m_numWaiting.fetch_sub(1);
+	#endif
 }
 inline void fts::Signal::wakeAll()
 {
-	if(m_isSomeoneWaiting.load())
-	{
-		//platform: linux
-		#ifdef FTS_PLATFORM_LINUX
-			syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, std::numeric_limits<int32_t>::max(), nullptr);
-		//platform: windows
-		#elif defined(FTS_PLATFORM_WINDOWS)
-			WakeByAddressAll(reinterpret_cast<void*>(&this->m_address));
-		//platform: unknown
-		#elif defined(FTS_PLATFORM_UNKNOWN)
-			for(int32_t i = this->m_numWaiting.load(); i > 0; i--)
-			{
-				this->m_unlocked.store(false);
-				this->m_mutex.unlock();
-				while(!m_unlocked.load());
-				this->m_mutex.lock();
-			}
-			this->m_numWaiting.store(0);
-		#endif
-		this->m_isSomeoneWaiting.store(false);
-	}
+	//platform: linux
+	#ifdef FTS_PLATFORM_LINUX
+		syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, std::numeric_limits<int>::max(), nullptr);
+	//platform: windows
+	#elif defined(FTS_PLATFORM_WINDOWS)
+		WakeByAddressAll(reinterpret_cast<void*>(&this->m_address));
+	//platform: unknown
+	#elif defined(FTS_PLATFORM_UNKNOWN)
+		for(int32_t i = this->m_numWaiting.load(); i > 0; i--)
+		{
+			this->m_unlocked.store(false);
+			this->m_mutex.unlock();
+			while(!m_unlocked.load());
+			this->m_mutex.lock();
+		}
+		this->m_numWaiting.store(0);
+	#endif
 }
 
 
