@@ -65,39 +65,24 @@
 
 namespace fts
 {
-	class I_lockableObject
+	class SpinLock
 	{
 		public:
-			virtual inline void lock() = 0;
-			virtual inline void unlock() = 0;
-			virtual inline bool try_lock() = 0;
-
-			I_lockableObject() = default;
-			virtual ~I_lockableObject() = default;
-			I_lockableObject(const I_lockableObject&) = default;
-			I_lockableObject(I_lockableObject&&) = default;
-			I_lockableObject& operator=(const I_lockableObject&) = default;
-			I_lockableObject& operator=(I_lockableObject&&) = default;
-	};
-	
-	class SpinLock : public I_lockableObject
-	{
-		public:
-			inline void lock() override;
-			inline void unlock() override;
-			inline bool try_lock() override;
+			inline void lock();
+			inline void unlock();
+			inline bool try_lock();
 
 			SpinLock();
 		
 		private:
 			std::atomic_bool m_isLocked;
 	};
-	class AdaptiveLock : public I_lockableObject
+	class AdaptiveLock
 	{
 		public:
-			inline void lock() override;
-			inline void unlock() override;
-			inline bool try_lock() override;
+			inline void lock();
+			inline void unlock();
+			inline bool try_lock();
 
 			AdaptiveLock();
 		
@@ -107,12 +92,12 @@ namespace fts
 			std::mutex m_mutex;
 			#endif
 	};
-	class SpinSemaphore : public I_lockableObject
+	class SpinSemaphore
 	{
 		public:
-			inline void lock() override;
-			inline void unlock() override;
-			inline bool try_lock() override;
+			inline void lock();
+			inline void unlock();
+			inline bool try_lock();
 
 			SpinSemaphore();
 			SpinSemaphore(int32_t max);
@@ -120,12 +105,12 @@ namespace fts
 		private:
 			std::atomic_int32_t m_counter;
 	};
-	class AdaptiveSemaphore : public I_lockableObject
+	class AdaptiveSemaphore
 	{
 		public:
-			inline void lock() override;
-			inline void unlock() override;
-			inline bool try_lock() override;
+			inline void lock();
+			inline void unlock();
+			inline bool try_lock();
 
 			AdaptiveSemaphore();
 			AdaptiveSemaphore(int32_t max);
@@ -138,27 +123,12 @@ namespace fts
 			#endif
 	};
 
-	class I_signallingObject
+	class Signal
 	{
 		public:
-			virtual inline void wait() = 0;
-			virtual inline void wake() = 0;
-			virtual inline void wakeAll() = 0;
-
-			I_signallingObject() = default;
-			virtual ~I_signallingObject() = default;
-			I_signallingObject(const I_signallingObject&) = default;
-			I_signallingObject(I_signallingObject&&) = default;
-			I_signallingObject& operator=(const I_signallingObject&) = default;
-			I_signallingObject& operator=(I_signallingObject&&) = default;
-	};
-
-	class Signal : public I_signallingObject
-	{
-		public:
-			inline void wait() override;
-			inline void wake() override;
-			inline void wakeAll() override;
+			inline void wait();
+			inline void wake();
+			inline void wakeAll();
 
 			Signal();
 		
@@ -170,12 +140,12 @@ namespace fts
 			std::atomic_int32_t m_numWaiting;
 			#endif
 	};
-	class SpinSignal : public I_signallingObject
+	class SpinSignal
 	{
 		public:
-			inline void wait() override;
-			inline void wake() override;
-			inline void wakeAll() override;
+			inline void wait();
+			inline void wake();
+			inline void wakeAll();
 
 			SpinSignal();
 		
@@ -183,32 +153,34 @@ namespace fts
 			std::atomic_char m_isWaiting;
 	};
 
-	class I_flaggingObject
+	class Flag
 	{
 		public:
-			virtual inline void raise() = 0;
-			virtual inline void lower() = 0;
-			virtual inline bool isRaised() = 0;
-
-			I_flaggingObject() = default;
-			virtual ~I_flaggingObject() = default;
-			I_flaggingObject(const I_flaggingObject&) = default;
-			I_flaggingObject(I_flaggingObject&&) = default;
-			I_flaggingObject& operator=(const I_flaggingObject&) = default;
-			I_flaggingObject& operator=(I_flaggingObject&&) = default;
-	};
-
-	class Flag : public I_flaggingObject
-	{
-		public:
-			inline void raise() override;
-			inline void lower() override;
-			inline bool isRaised() override;
+			inline void raise();
+			inline void lower();
+			inline bool isRaised();
 
 			Flag();
 		
 		private:
 			std::atomic_bool m_isRaised;
+	};
+
+	class ReadWriteLock
+	{
+		public:
+			inline void readLock();
+			inline void writeLock();
+			inline void readUnlock();
+			inline void writeUnlock();
+			inline bool readTryLock();
+			inline bool writeTryLock();
+
+			ReadWriteLock();
+		
+		//private:
+			std::atomic_int32_t m_numReaders;
+			std::atomic_bool m_writeRequest;
 	};
 }
 
@@ -523,4 +495,57 @@ inline void fts::Flag::lower()
 inline bool fts::Flag::isRaised()
 {
 	return this->m_isRaised.load();
+}
+
+
+//=========================================ReadWriteLock=========================================
+
+inline void fts::ReadWriteLock::readLock()
+{
+	while(true)
+	{
+		if(!this->m_writeRequest.load(std::memory_order_relaxed)) [[likely]] break;
+		while(this->m_writeRequest.load(std::memory_order_relaxed));
+	}
+	this->m_numReaders.fetch_add(1, std::memory_order_acquire);
+}
+inline void fts::ReadWriteLock::writeLock()
+{
+	while(true)
+	{
+		if((!this->m_writeRequest.exchange(true, std::memory_order_acquire)) && (this->m_numReaders.load(std::memory_order_relaxed) == 0)) [[likely]] break;
+		while(this->m_writeRequest.load(std::memory_order_relaxed));
+		while(this->m_numReaders.load(std::memory_order_relaxed) != 0);
+	}
+}
+inline void fts::ReadWriteLock::readUnlock()
+{
+	this->m_numReaders.fetch_sub(1, std::memory_order_acquire);
+}
+inline void fts::ReadWriteLock::writeUnlock()
+{
+	this->m_writeRequest.store(false, std::memory_order_release);
+}
+inline bool fts::ReadWriteLock::readTryLock()
+{
+	if(!this->m_writeRequest.load(std::memory_order_relaxed)) [[likely]]
+	{
+		this->m_numReaders.fetch_add(1, std::memory_order_acquire);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+inline bool fts::ReadWriteLock::writeTryLock()
+{
+	if((!this->m_writeRequest.exchange(true, std::memory_order_acquire)) && (this->m_numReaders.load(std::memory_order_relaxed) == 0)) [[likely]]
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

@@ -36,3 +36,6 @@ fts::SpinSignal::SpinSignal()
 
 fts::Flag::Flag()
 : m_isRaised(false) {}
+
+fts::ReadWriteLock::ReadWriteLock()
+: m_numReaders(0), m_writeRequest(false) {}

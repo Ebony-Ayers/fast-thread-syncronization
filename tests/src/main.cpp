@@ -12,11 +12,23 @@ void foo(fts::Signal* signal)
 
 int main(int /*argc*/, const char** /*argv*/)
 {
-	fts::Signal s;
+	fts::ReadWriteLock wrl;
 
-	std::thread t(foo, &s);
-	s.wait();
-	t.detach();
-	
+	wrl.readLock();
+	std::cout << "1" << std::endl;
+	wrl.readLock();
+	std::cout << "2" << std::endl;
+	wrl.readLock();
+	std::cout << "3" << std::endl;
+
+	wrl.readUnlock();
+	wrl.readUnlock();
+	wrl.readUnlock();
+
+	wrl.writeLock();
+	wrl.writeUnlock();
+	wrl.writeLock();
+	wrl.writeUnlock();
+
 	return 0;
 }
