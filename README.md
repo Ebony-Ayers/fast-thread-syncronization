@@ -3,9 +3,14 @@ A set of basic locks and other thread syncronization objects desined for high pe
 
 ## Syncronisation primatives
 Lock - a lock is used to restrict access to an area of code, like resources access, to one thread at a time by requireing locking the lock to procede
+
 Semaphore - a semaphore allow a limited number of threads to access an area of code at a time. Once the limit it exhausted threads must wait.
+
 Signal - wait untill another thread signals to continue. In many ways the oposite of a lock
+
 Flag - check if another thread has flagged. A wrapper arround an atomic bool.
+
+Read Write Lock - a pseudo combination of a lock and semaphore mimicing the behavior of atomics on a larger scale with many readers at a time but only one writer
 
 ## Implementation
 Lock, Semaphore, Signal all come in spin and adaptive variants. Spin variants simply loop untill they can continue. Adaptive variants use a call to the kernel to pause the thread. For short wait times spin variants will be faster and for long variants adaptive variants will be faster.
