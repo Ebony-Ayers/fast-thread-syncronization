@@ -30,5 +30,14 @@ int main(int /*argc*/, const char** /*argv*/)
 	wrl.writeLock();
 	wrl.writeUnlock();
 
+	fts::SpinSemaphore sem(1);
+
+	sem.lock();
+	sem.removeCounter();
+	sem.unlock();
+
+	auto result = sem.try_lock();
+	std::cout << result << std::endl;
+
 	return 0;
 }
