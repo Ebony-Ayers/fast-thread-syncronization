@@ -97,6 +97,8 @@ namespace fts
 			inline void lock();
 			inline void unlock();
 			inline bool try_lock();
+			
+			inline void unlockDestoryCounter();
 
 			inline void addCounter(int32_t n = 1);
 			inline void removeCounter(int32_t n = 1);
@@ -113,6 +115,8 @@ namespace fts
 			inline void lock();
 			inline void unlock();
 			inline bool try_lock();
+
+			inline void unlockDestoryCounter();
 
 			inline void addCounter(int32_t n = 1);
 			inline void removeCounter(int32_t n = 1);

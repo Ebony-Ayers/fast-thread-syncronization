@@ -132,6 +132,11 @@ namespace fts
 		}
 	}
 
+	inline void SpinSemaphore::unlockDestoryCounter()
+	{
+		return;
+	}
+
 	inline void SpinSemaphore::addCounter(int32_t n)
 	{
 		this->m_counter.fetch_add(n);
@@ -241,6 +246,20 @@ namespace fts
 		#endif
 
 		return false;
+	}
+
+	inline void AdaptiveSemaphore::unlockDestoryCounter()
+	{
+		//platform: linux
+		#ifdef FTS_PLATFORM_LINUX
+			syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
+		//platform: windows
+		#elif defined(FTS_PLATFORM_WINDOWS)
+			WakeByAddressSingle(reinterpret_cast<void*>(&m_address));
+		//platform: unknown
+		#elif defined(FTS_PLATFORM_UNKNOWN)
+			this->m_mutex.unlock();
+		#endif
 	}
 
 	inline void AdaptiveSemaphore::addCounter(int32_t n)
