@@ -187,9 +187,52 @@ namespace fts
 
 			ReadWriteLock();
 		
-		//private:
+		private:
 			std::atomic_int32_t m_numReaders;
 			std::atomic_bool m_writeRequest;
+	};
+
+
+
+	template<typename LockT>
+	class GenericLockGuard
+	{
+		public:
+			inline GenericLockGuard(LockT& lock);
+			explicit inline GenericLockGuard(LockT* lock);
+			inline ~GenericLockGuard();
+		private:
+			LockT* m_lock;
+	};
+
+	template<typename SemaphoreT>
+	class SemaphoreDestoryCounterLockGuard
+	{
+		public:
+			inline SemaphoreDestoryCounterLockGuard(SemaphoreT& semaphore);
+			explicit inline SemaphoreDestoryCounterLockGuard(SemaphoreT* semaphore);
+			inline ~SemaphoreDestoryCounterLockGuard();
+		private:
+			SemaphoreT* m_semaphore;
+	};
+
+	class ReadWriteLockReadLockGuard
+	{
+		public:
+			inline ReadWriteLockReadLockGuard(ReadWriteLock& readWriteLock);
+			explicit inline ReadWriteLockReadLockGuard(ReadWriteLock* readWriteLock);
+			inline ~ReadWriteLockReadLockGuard();
+		private:
+			ReadWriteLock* m_readWriteLock;
+	};
+	class ReadWriteLockWriteLockGuard
+	{
+		public:
+			inline ReadWriteLockWriteLockGuard(ReadWriteLock& readWriteLock);
+			explicit inline ReadWriteLockWriteLockGuard(ReadWriteLock* readWriteLock);
+			inline ~ReadWriteLockWriteLockGuard();
+		private:
+			ReadWriteLock* m_readWriteLock;
 	};
 }
 

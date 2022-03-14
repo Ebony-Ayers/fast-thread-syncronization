@@ -33,8 +33,11 @@ int main(int /*argc*/, const char** /*argv*/)
 	fts::SpinSemaphore sem(1);
 
 	sem.lock();
-	sem.removeCounter();
+	//sem.removeCounter();
 	sem.unlock();
+
+	fts::SemaphoreDestoryCounterLockGuard lg(sem);
+	lg.~SemaphoreDestoryCounterLockGuard();
 
 	auto result = sem.try_lock();
 	std::cout << result << std::endl;

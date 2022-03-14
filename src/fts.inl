@@ -132,7 +132,7 @@ namespace fts
 		}
 	}
 
-	inline void SpinSemaphore::unlockDestoryCounter()
+	void SpinSemaphore::unlockDestoryCounter()
 	{
 		return;
 	}
@@ -421,5 +421,72 @@ namespace fts
 		{
 			return false;
 		}
+	}
+
+	
+	template<typename LockT>
+	inline GenericLockGuard<LockT>::GenericLockGuard(LockT& lock)
+	{
+		this->m_lock = &lock;
+		this->m_lock->lock();
+	}
+	template<typename LockT>
+	inline GenericLockGuard<LockT>::GenericLockGuard(LockT* lock)
+	{
+		this->m_lock = lock;
+		this->m_lock->lock();
+	}
+	template<typename LockT>
+	inline GenericLockGuard<LockT>::~GenericLockGuard()
+	{
+		this->m_lock->unlock();
+	}
+
+	template<typename SemaphoreT>
+	inline SemaphoreDestoryCounterLockGuard<SemaphoreT>::SemaphoreDestoryCounterLockGuard(SemaphoreT& semaphore)
+	{
+		this->m_semaphore = &semaphore;
+		this->m_semaphore->lock();
+	}
+	template<typename SemaphoreT>
+	inline SemaphoreDestoryCounterLockGuard<SemaphoreT>::SemaphoreDestoryCounterLockGuard(SemaphoreT* semaphore)
+	{
+		this->m_semaphore = semaphore;
+		this->m_semaphore->lock();
+	}
+	template<typename SemaphoreT>
+	inline SemaphoreDestoryCounterLockGuard<SemaphoreT>::~SemaphoreDestoryCounterLockGuard()
+	{
+		this->m_semaphore->unlockDestoryCounter();
+	}
+
+	inline ReadWriteLockReadLockGuard::ReadWriteLockReadLockGuard(ReadWriteLock& readWriteLock)
+	{
+		this->m_readWriteLock = &readWriteLock;
+		this->m_readWriteLock->readLock();
+	}
+	inline ReadWriteLockReadLockGuard::ReadWriteLockReadLockGuard(ReadWriteLock* readWriteLock)
+	{
+		this->m_readWriteLock = readWriteLock;
+		this->m_readWriteLock->readLock();
+	}
+	inline ReadWriteLockReadLockGuard::~ReadWriteLockReadLockGuard()
+	{
+		this->m_readWriteLock->readUnlock();
+	}
+
+	inline ReadWriteLockWriteLockGuard::ReadWriteLockWriteLockGuard(ReadWriteLock& readWriteLock)
+	{
+		this->m_readWriteLock = &readWriteLock;
+		this->m_readWriteLock->writeLock();
+	}
+	inline ReadWriteLockWriteLockGuard::ReadWriteLockWriteLockGuard(ReadWriteLock* readWriteLock)
+	{
+		this->m_readWriteLock = readWriteLock;
+		this->m_readWriteLock->writeLock();
+	}
+	inline ReadWriteLockWriteLockGuard::~ReadWriteLockWriteLockGuard()
+	{
+		this->m_readWriteLock->writeUnlock();
 	}
 }
