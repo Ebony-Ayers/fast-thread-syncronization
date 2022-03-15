@@ -146,6 +146,11 @@ namespace fts
 		this->m_counter.fetch_sub(n);
 	}
 
+	inline int32_t SpinSemaphore::numCounters() const
+	{
+		return this->m_counter.load();
+	}
+
 
 	//=========================================AdaptiveSemaphore=========================================
 	inline void AdaptiveSemaphore::lock()
@@ -269,6 +274,11 @@ namespace fts
 	inline void AdaptiveSemaphore::removeCounter(int32_t n)
 	{
 		this->m_counter.fetch_sub(n);
+	}
+
+	inline int32_t AdaptiveSemaphore::numCounters() const
+	{
+		return this->m_counter.load();
 	}
 
 	//=========================================Signal=========================================

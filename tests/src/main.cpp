@@ -39,6 +39,8 @@ int main(int /*argc*/, const char** /*argv*/)
 	fts::SemaphoreDestoryCounterLockGuard lg(sem);
 	lg.~SemaphoreDestoryCounterLockGuard();
 
+	std::cout << "num counters " << sem.numCounters() << std::endl;
+
 	auto result = sem.try_lock();
 	std::cout << result << std::endl;
 

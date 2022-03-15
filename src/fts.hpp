@@ -103,6 +103,8 @@ namespace fts
 			inline void addCounter(int32_t n = 1);
 			inline void removeCounter(int32_t n = 1);
 
+			inline int32_t numCounters() const;
+
 			SpinSemaphore();
 			SpinSemaphore(int32_t max);
 		
@@ -120,6 +122,8 @@ namespace fts
 
 			inline void addCounter(int32_t n = 1);
 			inline void removeCounter(int32_t n = 1);
+
+			inline int32_t numCounters() const;
 
 			AdaptiveSemaphore();
 			AdaptiveSemaphore(int32_t max);
