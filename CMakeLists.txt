@@ -6,30 +6,34 @@ include(cmake/StandardProjectSettings.cmake)
 include(cmake/PreventInSourceBuilds.cmake)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
-add_library(project_options INTERFACE)
-#target_compile_features(project_options INTERFACE cxx_std_17)
+if(NOT DEFINED fts_project_options)
+	add_library(fts_project_options INTERFACE)
+endif()
+#target_compile_features(fts_project_options INTERFACE cxx_std_17)
 include(cmake/CppStandard.cmake)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
   option(ENABLE_BUILD_WITH_TIME_TRACE "Enable -ftime-trace to generate time tracing .json files on clang" OFF)
   if(ENABLE_BUILD_WITH_TIME_TRACE)
-    target_compile_options(project_options INTERFACE -ftime-trace)
+    target_compile_options(fts_project_options INTERFACE -ftime-trace)
   endif()
 endif()
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
-add_library(project_warnings INTERFACE)
+if(NOT DEFINED fts_project_warnings)
+	add_library(fts_project_warnings INTERFACE)
+endif()
 
 # enable cache system
 include(cmake/Cache.cmake)
 
 # standard compiler warnings
 include(cmake/CompilerWarnings.cmake)
-set_project_warnings(project_warnings)
+set_project_warnings(fts_project_warnings)
 
 # sanitizer options if supported by compiler
 include(cmake/Sanitizers.cmake)
-enable_sanitizers(project_options)
+enable_sanitizers(fts_project_options)
 
 # allow for static analysis options
 include(cmake/StaticAnalyzers.cmake)
@@ -43,7 +47,7 @@ if(ENABLE_PCH)
   #
   # consider breaking this out per project as necessary
   target_precompile_headers(
-    project_options
+    fts_project_options
     INTERFACE
     <atomic>)
 endif()
