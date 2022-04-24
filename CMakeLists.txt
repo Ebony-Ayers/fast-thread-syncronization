@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
+if(TARGET fts)
+    return()
+endif(TARGET fts)
 
 # Set the project name to your project name, my project isn't very descriptive
 project(fts CXX)
