@@ -20,7 +20,8 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-#pragma once
+#ifndef FTS_HPP_HEADER_GUARD
+#define FTS_HPP_HEADER_GUARD
 
 
 
@@ -246,3 +247,5 @@ namespace fts
 #ifdef FTS_SINGLE_HEADER_IMPLEMENTATION
 	#include "fts.cpp"
 #endif
+
+#endif //#ifndef FTS_HPP_HEADER_GUARD
