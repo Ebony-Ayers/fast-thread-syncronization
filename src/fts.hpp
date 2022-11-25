@@ -20,9 +20,9 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+#pragma once
 #ifndef FTS_HPP_HEADER_GUARD
 #define FTS_HPP_HEADER_GUARD
-
 
 
 #if defined(__clang__)
@@ -55,7 +55,7 @@
 	#include <sys/syscall.h>
 	#include <linux/futex.h>
 #endif
-#if FTS_PLATFORM_WINDOWS
+#ifdef FTS_PLATFORM_WINDOWS
 	#include <windows.h>
 #endif
 #include <iostream>
@@ -73,6 +73,11 @@ namespace fts
 			inline bool try_lock();
 
 			SpinLock();
+			SpinLock(const SpinLock&) = delete;
+			SpinLock(SpinLock&&) = delete;
+			
+			SpinLock& operator=(const SpinLock&) = delete;
+			SpinLock& operator=(SpinLock&&) = delete;
 		
 		private:
 			std::atomic_bool m_isLocked;
@@ -85,6 +90,11 @@ namespace fts
 			inline bool try_lock();
 
 			AdaptiveLock();
+			AdaptiveLock(const AdaptiveLock&) = delete;
+			AdaptiveLock(AdaptiveLock&&) = delete;
+
+			AdaptiveLock& operator=(const AdaptiveLock&) = delete;
+			AdaptiveLock& operator=(AdaptiveLock&&) = delete;
 		
 		private:
 			int32_t m_address;
@@ -108,6 +118,11 @@ namespace fts
 
 			SpinSemaphore();
 			SpinSemaphore(int32_t max);
+			SpinSemaphore(const SpinSemaphore&) = delete;
+			SpinSemaphore(SpinSemaphore&&) = delete;
+
+			SpinSemaphore& operator=(const SpinSemaphore&) = delete;
+			SpinSemaphore& operator=(SpinSemaphore&&) = delete;
 		
 		private:
 			std::atomic_int32_t m_counter;
@@ -128,6 +143,11 @@ namespace fts
 
 			AdaptiveSemaphore();
 			AdaptiveSemaphore(int32_t max);
+			AdaptiveSemaphore(const AdaptiveSemaphore&) = delete;
+			AdaptiveSemaphore(AdaptiveSemaphore&&) = delete;
+
+			AdaptiveSemaphore& operator=(const AdaptiveSemaphore&) = delete;
+			AdaptiveSemaphore& operator=(AdaptiveSemaphore&&) = delete;
 		
 		private:
 			std::atomic_int32_t m_counter;
@@ -145,6 +165,11 @@ namespace fts
 			inline void wakeAll();
 
 			Signal();
+			Signal(const Signal&) = delete;
+			Signal(Signal&&) = delete;
+
+			Signal& operator=(const Signal&) = delete;
+			Signal& operator=(Signal&&) = delete;
 		
 		private:
 			int32_t m_address;
@@ -162,6 +187,11 @@ namespace fts
 			inline void wakeAll();
 
 			SpinSignal();
+			SpinSignal(const SpinSignal&) = delete;
+			SpinSignal(SpinSignal&&) = delete;
+
+			SpinSignal& operator=(const SpinSignal&) = delete;
+			SpinSignal& operator=(SpinSignal&&) = delete;
 		
 		private:
 			std::atomic_char m_isWaiting;
@@ -175,6 +205,11 @@ namespace fts
 			inline bool isRaised();
 
 			Flag();
+			Flag(const Flag&) = delete;
+			Flag(Flag&&) = delete;
+
+			Flag& operator=(const Flag&) = delete;
+			Flag& operator=(Flag&&) = delete;
 		
 		private:
 			std::atomic_bool m_isRaised;
@@ -191,6 +226,11 @@ namespace fts
 			inline bool writeTryLock();
 
 			ReadWriteLock();
+			ReadWriteLock(const ReadWriteLock&) = delete;
+			ReadWriteLock(ReadWriteLock&&) = delete;
+
+			ReadWriteLock& operator=(const ReadWriteLock&) = delete;
+			ReadWriteLock& operator=(ReadWriteLock&&) = delete;
 		
 		private:
 			std::atomic_int32_t m_numReaders;
@@ -205,7 +245,12 @@ namespace fts
 		public:
 			inline GenericLockGuard(LockT& lock);
 			explicit inline GenericLockGuard(LockT* lock);
+			GenericLockGuard(const GenericLockGuard<LockT>&) = delete;
+			GenericLockGuard(GenericLockGuard<LockT>&&) = delete;
 			inline ~GenericLockGuard();
+
+			GenericLockGuard<LockT>& operator=(const GenericLockGuard<LockT>&) = delete;
+			GenericLockGuard<LockT>& operator=(GenericLockGuard<LockT>&&) = delete;
 		private:
 			LockT* m_lock;
 	};
@@ -216,7 +261,12 @@ namespace fts
 		public:
 			inline SemaphoreDestoryCounterLockGuard(SemaphoreT& semaphore);
 			explicit inline SemaphoreDestoryCounterLockGuard(SemaphoreT* semaphore);
+			SemaphoreDestoryCounterLockGuard(const SemaphoreDestoryCounterLockGuard<SemaphoreT>&) = delete;
+			SemaphoreDestoryCounterLockGuard(SemaphoreDestoryCounterLockGuard<SemaphoreT>&&) = delete;
 			inline ~SemaphoreDestoryCounterLockGuard();
+
+			SemaphoreDestoryCounterLockGuard<SemaphoreT>& operator=(const SemaphoreDestoryCounterLockGuard<SemaphoreT>&) = delete;
+			SemaphoreDestoryCounterLockGuard<SemaphoreT>& operator=(SemaphoreDestoryCounterLockGuard<SemaphoreT>&&) = delete;
 		private:
 			SemaphoreT* m_semaphore;
 	};
@@ -226,7 +276,12 @@ namespace fts
 		public:
 			inline ReadWriteLockReadLockGuard(ReadWriteLock& readWriteLock);
 			explicit inline ReadWriteLockReadLockGuard(ReadWriteLock* readWriteLock);
+			ReadWriteLockReadLockGuard(const ReadWriteLockReadLockGuard&) = delete;
+			ReadWriteLockReadLockGuard(ReadWriteLockReadLockGuard&&) = delete;
 			inline ~ReadWriteLockReadLockGuard();
+
+			ReadWriteLockReadLockGuard& operator=(const ReadWriteLockReadLockGuard&) = delete;
+			ReadWriteLockReadLockGuard& operator=(ReadWriteLockReadLockGuard&&) = delete;
 		private:
 			ReadWriteLock* m_readWriteLock;
 	};
@@ -235,7 +290,12 @@ namespace fts
 		public:
 			inline ReadWriteLockWriteLockGuard(ReadWriteLock& readWriteLock);
 			explicit inline ReadWriteLockWriteLockGuard(ReadWriteLock* readWriteLock);
+			ReadWriteLockWriteLockGuard(const ReadWriteLockWriteLockGuard&) = delete;
+			ReadWriteLockWriteLockGuard(ReadWriteLockWriteLockGuard&&) = delete;
 			inline ~ReadWriteLockWriteLockGuard();
+
+			ReadWriteLockWriteLockGuard& operator=(const ReadWriteLockWriteLockGuard&) = delete;
+			ReadWriteLockWriteLockGuard& operator=(ReadWriteLockWriteLockGuard&&) = delete;
 		private:
 			ReadWriteLock* m_readWriteLock;
 	};

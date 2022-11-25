@@ -50,8 +50,10 @@ namespace fts
 			this->m_address = 1;
 		//platform: windows
 		#elif defined(FTS_PLATFORM_WINDOWS)
+			std::cout << "herllo there I am being called from a degenerate operating system" << std::endl;
 			auto value = 1;
 			WaitOnAddress(reinterpret_cast<void*>(&this->m_address), &value, sizeof(value), INFINITE);
+			this->m_address = 1;
 		//platform: unknown
 		#elif defined(FTS_PLATFORM_UNKNOWN)
 			this->m_mutex.lock();
@@ -65,7 +67,8 @@ namespace fts
 			this->m_address = 0;
 		//platform: windows
 		#elif defined(FTS_PLATFORM_WINDOWS)
-			this->m_address++;
+		std::cout << "yeet" << std::endl;
+			this->m_address = 0;
 			WakeByAddressSingle(reinterpret_cast<void*>(&this->m_address));
 		//platform: unknown
 		#elif defined(FTS_PLATFORM_UNKNOWN)
@@ -88,6 +91,7 @@ namespace fts
 			{
 				auto value = 1;
 				WaitOnAddress(reinterpret_cast<void*>(&this->m_address), &value, sizeof(value), INFINITE);
+				this->m_address = 1;
 				return true;
 			}
 			else return false;
