@@ -10,39 +10,28 @@ void foo(fts::Signal* signal)
 	signal->wake();
 }
 
+void func(fts::AdaptiveLock* l)
+{
+	l->unlock();
+}
+
 int main(int /*argc*/, const char** /*argv*/)
 {
-	fts::ReadWriteLock wrl;
+	fts::AdaptiveLock ally;
 
-	wrl.readLock();
-	std::cout << "1" << std::endl;
-	wrl.readLock();
-	std::cout << "2" << std::endl;
-	wrl.readLock();
-	std::cout << "3" << std::endl;
+	{
+		FTS_GENERIC_LOCKGUARD(&ally);
+		//fts::GenericLockGuard lockGuard(&ally);
+	}
 
-	wrl.readUnlock();
-	wrl.readUnlock();
-	wrl.readUnlock();
+	ally.lock();
 
-	wrl.writeLock();
-	wrl.writeUnlock();
-	wrl.writeLock();
-	wrl.writeUnlock();
+	std::thread t(func, &ally);
 
-	fts::SpinSemaphore sem(1);
+	ally.lock();
+	ally.unlock();
 
-	sem.lock();
-	//sem.removeCounter();
-	sem.unlock();
-
-	fts::SemaphoreDestoryCounterLockGuard lg(sem);
-	lg.~SemaphoreDestoryCounterLockGuard();
-
-	std::cout << "num counters " << sem.numCounters() << std::endl;
-
-	auto result = sem.try_lock();
-	std::cout << result << std::endl;
+	t.join();
 
 	return 0;
 }

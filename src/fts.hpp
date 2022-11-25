@@ -62,6 +62,10 @@
 #include <thread>
 #include <chrono>
 
+#define FTS_GENERIC_LOCKGUARD(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance(l);
 
 namespace fts
 {
