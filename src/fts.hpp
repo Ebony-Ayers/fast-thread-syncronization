@@ -62,6 +62,7 @@
 #include <thread>
 #include <chrono>
 
+//duplicate macros available at the bottom of the file to allow multiple macros per scope
 #define FTS_GENERIC_LOCKGUARD(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance(l);
 #define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance(l);
 #define FTS_READ_WRITE_READ_LOCKGUARD(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance(l);
@@ -311,5 +312,43 @@ namespace fts
 #ifdef FTS_SINGLE_HEADER_IMPLEMENTATION
 	#include "fts.cpp"
 #endif
+
+//duplicate macros to allow multiple macros in the same scope
+#define FTS_GENERIC_LOCKGUARD_1(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance1(l);
+#define FTS_GENERIC_LOCKGUARD_2(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance2(l);
+#define FTS_GENERIC_LOCKGUARD_3(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance3(l);
+#define FTS_GENERIC_LOCKGUARD_4(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance4(l);
+#define FTS_GENERIC_LOCKGUARD_5(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance5(l);
+#define FTS_GENERIC_LOCKGUARD_6(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance6(l);
+#define FTS_GENERIC_LOCKGUARD_7(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance7(l);
+#define FTS_GENERIC_LOCKGUARD_8(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance8(l);
+#define FTS_GENERIC_LOCKGUARD_9(l) fts::GenericLockGuard ftsMacroGenericLockGuardInstance9(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_1(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance1(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_2(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance2(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_3(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance3(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_4(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance4(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_5(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance5(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_6(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance6(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_7(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance7(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_8(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance8(l);
+#define FTS_SEMAPHORE_DESTORY_COUNTER_LOCKGUARD_9(l) fts::SemaphoreDestoryCounterLockGuard ftsMacroSemaphoreDestoryCounterLockGuardInstance9(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_1(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance1(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_2(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance2(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_3(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance3(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_4(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance4(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_5(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance5(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_6(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance6(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_7(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance7(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_8(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance8(l);
+#define FTS_READ_WRITE_READ_LOCKGUARD_9(l) fts::ReadWriteLockReadLockGuard ftsMacroReadWriteLockReadLockGuardInstance9(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_1(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance1(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_2(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance2(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_3(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance3(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_4(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance4(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_5(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance5(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_6(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance6(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_7(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance7(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_8(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance8(l);
+#define FTS_READ_WRITE_WRITE_LOCKGUARD_9(l) fts::ReadWriteLockWriteLockGuard ftsMacroReadWriteLockWriteLockGuardInstance9(l);
 
 #endif //#ifndef FTS_HPP_HEADER_GUARD
