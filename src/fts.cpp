@@ -43,9 +43,9 @@ fts::AdaptiveSemaphore::AdaptiveSemaphore(int32_t max)
 
 
 fts::Signal::Signal()
-: m_address(0)
+: m_address(0), m_numWaiting(0)
 #ifdef FTS_PLATFORM_UNKNOWN
-, m_unlocked(false), m_numWaiting(0)
+, m_mutex(), m_unlocked(false)
 #endif
 {
 	#ifdef FTS_PLATFORM_UNKNOWN

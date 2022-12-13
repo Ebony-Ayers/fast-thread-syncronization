@@ -290,9 +290,11 @@ namespace fts
 	{
 		//platform: linux
 		#ifdef FTS_PLATFORM_LINUX
+			this->m_numWaiting.fetch_add(1);
 			syscall(SYS_futex, &this->m_address, FUTEX_WAIT_PRIVATE, 0, nullptr);
 		//platform: windows
 		#elif defined(FTS_PLATFORM_WINDOWS)
+			this->m_numWaiting.fetch_add(1);
 			auto value = 1;
 			WaitOnAddress(reinterpret_cast<void*>(&this->m_address), &value, sizeof(value), INFINITE);
 		//platform: unknown
@@ -307,9 +309,11 @@ namespace fts
 	{
 		//platform: linux
 		#ifdef FTS_PLATFORM_LINUX
+			this->m_numWaiting.fetch_sub(1);
 			syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, 1, nullptr);
 		//platform: windows
 		#elif defined(FTS_PLATFORM_WINDOWS)
+			this->m_numWaiting.fetch_sub(1);
 			WakeByAddressSingle(reinterpret_cast<void*>(&this->m_address));
 		//platform: unknown
 		#elif defined(FTS_PLATFORM_UNKNOWN)
@@ -324,9 +328,11 @@ namespace fts
 	{
 		//platform: linux
 		#ifdef FTS_PLATFORM_LINUX
+			this->m_numWaiting.store(0);
 			syscall(SYS_futex, &this->m_address, FUTEX_WAKE_PRIVATE, std::numeric_limits<int>::max(), nullptr);
 		//platform: windows
 		#elif defined(FTS_PLATFORM_WINDOWS)
+			this->m_numWaiting.store(0);
 			WakeByAddressAll(reinterpret_cast<void*>(&this->m_address));
 		//platform: unknown
 		#elif defined(FTS_PLATFORM_UNKNOWN)
@@ -339,6 +345,11 @@ namespace fts
 			}
 			this->m_numWaiting.store(0);
 		#endif
+	}
+
+	inline bool Signal::hasWaitingThread()
+	{
+		return this->m_numWaiting.load() > 0;
 	}
 
 
@@ -368,6 +379,10 @@ namespace fts
 		this->m_isWaiting.store(0, std::memory_order_release);
 	}
 
+	inline bool SpinSignal::hasWaitingThread()
+	{
+		return this->m_isWaiting.load() > 0;
+	}
 
 
 	//=========================================flag=========================================

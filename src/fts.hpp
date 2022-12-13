@@ -169,6 +169,8 @@ namespace fts
 			inline void wake();
 			inline void wakeAll();
 
+			inline bool hasWaitingThread();
+
 			Signal();
 			Signal(const Signal&) = delete;
 			Signal(Signal&&) = delete;
@@ -178,10 +180,10 @@ namespace fts
 		
 		private:
 			int32_t m_address;
+			std::atomic_int32_t m_numWaiting;
 			#ifdef FTS_PLATFORM_UNKNOWN
 			std::mutex m_mutex;
 			std::atomic_bool m_unlocked;
-			std::atomic_int32_t m_numWaiting;
 			#endif
 	};
 	class SpinSignal
@@ -190,6 +192,8 @@ namespace fts
 			inline void wait();
 			inline void wake();
 			inline void wakeAll();
+
+			inline bool hasWaitingThread();
 
 			SpinSignal();
 			SpinSignal(const SpinSignal&) = delete;
